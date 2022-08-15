@@ -18,10 +18,10 @@ output_nomatch_filename = input_filename.replace(".txt", "_without_" + matcher_s
 try: 
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filename', type=str, default=input_filename, help="input file")
-    parser.add_argument('-o',  '--output', type=str, default=matcher, help="output directory")
-    parser.add_argument('-d', '--delimiter', type=str, default=delimiter, help="token to delimit records")
-    parser.add_argument('-m',  '--matcher', type=str, default=matcher, help="token to seek a match in records")
+    parser.add_argument('-f', '--filename', type=str, default=input_filename, help=f"input file, default: {input_filename}")
+    parser.add_argument('-o',  '--output', type=str, default=matcher, help=f"output directory, default: {output_directory}")
+    parser.add_argument('-d', '--delimiter', type=str, default=delimiter, help=f"token to delimit records, default: {delimiter}")
+    parser.add_argument('-m',  '--matcher', type=str, default=matcher, help=f"token to seek a match in records, default: {matcher}")
     args = parser.parse_args()
 
     input_filename = args.filename
