@@ -2,6 +2,7 @@
 # usage:
 #   python separate_records.py [-f INPUT_FILENAME -o OUTPUT_DIRECTORY -d DELIMITER -m MATCHER] 
 
+import os
 from datetime import datetime
 from re import split
 
@@ -12,8 +13,6 @@ matcher = "1280001"
 matcher_signifies = "Thailand"
 input_filename = "DX-XF-FF.txt"
 output_directory = "."
-output_match_filename = input_filename.replace(".txt", "_with_" + matcher_signifies)
-output_nomatch_filename = input_filename.replace(".txt", "_without_" + matcher_signifies)
 
 try: 
     import argparse
@@ -24,12 +23,18 @@ try:
     parser.add_argument('-m',  '--matcher', type=str, default=matcher, help=f"token to seek a match in records, default: {matcher}")
     args = parser.parse_args()
 
-    input_filename = args.filename
+    input_filename = args.filename    
     output_directory = args.output
     delimiter = args.delimiter
     matcher = args.matcher
 except ImportError:
     print("using default options")
+
+filename = os.path.basename(input_filename)
+basename, ext = os.path.splitext(filename)
+
+output_match_filename = os.path.join(output_directory, basename +  "_with_" + matcher_signifies)
+output_nomatch_filename = os.path.join(output_directory, basename +  "_without_" + matcher_signifies + ".80")
 
 print("input filename:", input_filename)
 print("output directory:", output_directory)
