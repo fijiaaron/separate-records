@@ -18,7 +18,7 @@ try:
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--filename', type=str, default=input_filename, help=f"input file, default: {input_filename}")
-    parser.add_argument('-o',  '--output', type=str, default=matcher, help=f"output directory, default: {output_directory}")
+    parser.add_argument('-o',  '--output', type=str, default=output_directory, help=f"output directory, default: {output_directory}")
     parser.add_argument('-d', '--delimiter', type=str, default=delimiter, help=f"token to delimit records, default: {delimiter}")
     parser.add_argument('-m',  '--matcher', type=str, default=matcher, help=f"token to seek a match in records, default: {matcher}")
     args = parser.parse_args()
