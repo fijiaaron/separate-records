@@ -13,6 +13,7 @@ matcher = "1280001"
 matcher_signifies = "Thailand"
 input_filename = "DX-XF-FF.txt"
 output_directory = "."
+file_ext = ".080"
 
 try: 
     import argparse
@@ -33,8 +34,8 @@ except ImportError:
 filename = os.path.basename(input_filename)
 basename, ext = os.path.splitext(filename)
 
-output_match_filename = os.path.join(output_directory, basename +  "_with_" + matcher_signifies)
-output_nomatch_filename = os.path.join(output_directory, basename +  "_without_" + matcher_signifies + ".80")
+output_match_filename = os.path.join(output_directory, basename +  "_with_" + matcher_signifies +  file_ext)
+output_nomatch_filename = os.path.join(output_directory, basename +  "_without_" + matcher_signifies + file_ext)
 
 print("input filename:", input_filename)
 print("output directory:", output_directory)
