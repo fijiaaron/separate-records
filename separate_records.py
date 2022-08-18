@@ -51,8 +51,12 @@ with open(input_filename, "r") as infile:
 
     for section in sections:
         if matcher in section:
+            if len(matches) > 0:
+                section = " " + section
             matches.append(section)
         else:
+            if len(matches) > 0:
+                section = " " + section
             nomatches.append(section)
 
 print(f"sections containing `{matcher}`:", len(matches))
