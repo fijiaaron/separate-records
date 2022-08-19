@@ -131,6 +131,6 @@ def split_content_into_sections(content, delimiter):
     
     return sections
 
-# this can be run standalong or imported with `from separate_records import separate_records`
+# this can be run standalone or imported with `from separate_records import separate_records`
 if __name__ == "__main__":
     separate_records(input_filename=input_filename, delimiter=delimiter, matcher=matcher, matcher_signifies=matcher_signifies, output_directory=output_directory)
