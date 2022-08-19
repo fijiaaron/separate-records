@@ -31,10 +31,11 @@ and a Windows executable version that can be run from the command line:
 
 ### set default values in separate_records.ini
 
-    [SETTINGS]
+    [DEFAULTS]
     delimiter = //STX12
     matcher = 1280001
     matcher_signifies = Thailand
     input_filename = DX-XF-FF.txt
     output_directory = .
     file_ext = .080
+

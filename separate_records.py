@@ -17,14 +17,14 @@ file_ext = ".080"
 from configparser import ConfigParser
 config = ConfigParser()
 config.read("separate_records.ini") 
-if config and config.has_section("SETTINGS"):
-    settings = config['SETTINGS']
-    delimiter = settings['delimiter'] if settings['delimiter'] else delimiter
-    matcher = settings['matcher'] if settings['matcher'] else matcher
-    matcher_signifies = settings['matcher_signifies'] if settings['matcher_signifies'] else matcher_signifies
-    input_filename = settings['input_filename'] if settings['input_filename'] else input_filename
-    output_directory = settings['output_directory'] if settings['output_directory'] else output_directory
-    file_ext = settings['file_ext'] if settings['file_ext'] else file_ext
+if config and config.has_section("DEFAULTS"):
+    defaults = config["DEFAULTS"]
+    delimiter = defaults['delimiter'] if defaults['delimiter'] else delimiter
+    matcher = defaults['matcher'] if defaults['matcher'] else matcher
+    matcher_signifies = defaults['matcher_signifies'] if defaults['matcher_signifies'] else matcher_signifies
+    input_filename = defaults['input_filename'] if defaults['input_filename'] else input_filename
+    output_directory = defaults['output_directory'] if defaults['output_directory'] else output_directory
+    file_ext = defaults['file_ext'] if defaults['file_ext'] else file_ext
 
 # get command line options
 import argparse
@@ -119,11 +119,11 @@ def split_content_into_sections(content, delimiter):
         if len(section_starts) > i+1:
             finish = section_starts[i+1]
         
-        # of this is the last section, use end of the content file for end of section
+        # if this is the last section, use end of the content file for end of section
         else:
             finish = content_end
 
-        # slice the content for each section
+        # get a slice of the content for the current section
         section = content[start:finish]
 
         # add the section to our list
