@@ -4,7 +4,6 @@
 
 import os
 import re
-from collections import defaultdict
 
 # set default parameters
 delimiter = "//STX12"
@@ -83,22 +82,22 @@ def separate_records(input_filename=input_filename, delimiter=delimiter, matcher
     print(f"total sections: ", len(sections))
 
     # write matching records to output file
-    with open(output_match_filename, "w") as outfile_matches:
-        if len(matches) != 0:
+    if len(matches) != 0:
+        with open(output_match_filename, "w") as outfile_matches:
             content_matches = "".join(matches)
             outfile_matches.write(content_matches)
             print("wrote matches to file: ", output_match_filename)
-        else:
-            print("no matches found, file not created")
+    else:
+        print("no matches found, file not created")
 
     # write non-matching records to output file
-    with open(output_nomatch_filename, "w") as outfile_nomatches:
-        if len(nomatches) != 0:
-            content_nomatches = "".join(nomatches)
+    if len(nomatches) != 0:
+        content_nomatches = "".join(nomatches)
+        with open(output_nomatch_filename, "w") as outfile_nomatches:
             outfile_nomatches.write(content_nomatches)
             print("wrote non-matches to file: ", output_nomatch_filename)
-        else:
-            print(f"no non-matches found, file not created")
+    else:
+        print(f"no non-matches found, file not created")
 
 # helper function for splitting content into list
 def split_content_into_sections(content, delimiter):
