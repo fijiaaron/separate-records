@@ -4,6 +4,7 @@
 
 import os
 import re
+from collections import defaultdict
 
 # set default parameters
 delimiter = "//STX12"
@@ -13,7 +14,21 @@ input_filename = "DX-XF-FF.txt"
 output_directory = "."
 file_ext = ".080"
 
-# set up from command line options
+# get settings from config file
+from configparser import ConfigParser
+config = ConfigParser()
+config.read("separate_records.ini") 
+if config and config.has_section("SETTINGS"):
+    settings = config['SETTINGS']
+
+    delimiter = settings['delimiter'] if settings['delimiter'] else delimiter
+    matcher = settings['matcher'] if settings['matcher'] else matcher
+    matcher_signifies = settings['matcher_signifies'] if settings['matcher_signifies'] else matcher_signifies
+    input_filename = settings['input_filename'] if settings['input_filename'] else input_filename
+    output_directory = settings['output_directory'] if settings['output_directory'] else output_directory
+    file_ext = settings['file_ext'] if settings['file_ext'] else file_ext
+
+# get command line options
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--filename', type=str, default=input_filename, help=f"input file, default: {input_filename}")
@@ -21,6 +36,7 @@ parser.add_argument('-o',  '--output', type=str, default=output_directory, help=
 parser.add_argument('-d', '--delimiter', type=str, default=delimiter, help=f"token to delimit records, default: {delimiter}")
 parser.add_argument('-m',  '--matcher', type=str, default=matcher, help=f"token to seek a match in records, default: {matcher}")
 args = parser.parse_args()
+
 
 # set parameters from command line options
 try: 
@@ -66,7 +82,7 @@ def separate_records(input_filename=input_filename, delimiter=delimiter, matcher
 
     # print simple report of processing
     print(f"sections containing `{matcher}`:", len(matches))
-    print(f"sections not containing `{matcher}:`", len(nomatches))
+    print(f"sections not containing `{matcher}`:", len(nomatches))
     print(f"total sections: ", len(sections))
 
     # write matching records to output file
@@ -76,7 +92,7 @@ def separate_records(input_filename=input_filename, delimiter=delimiter, matcher
             outfile_matches.write(content_matches)
             print("wrote matches to file: ", output_match_filename)
         else:
-            print("no matches found, file not created: ", output_match_filename)
+            print("no matches found, file not created")
 
     # write non-matching records to output file
     with open(output_nomatch_filename, "w") as outfile_nomatches:
@@ -85,7 +101,7 @@ def separate_records(input_filename=input_filename, delimiter=delimiter, matcher
             outfile_nomatches.write(content_nomatches)
             print("wrote non-matches to file: ", output_nomatch_filename)
         else:
-            print(f"no non-matches found, file not created:", output_nomatch_filename)
+            print(f"no non-matches found, file not created")
 
 # helper function for splitting content into list
 def split_content_into_sections(content, delimiter):
