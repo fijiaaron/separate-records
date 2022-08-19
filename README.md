@@ -35,6 +35,6 @@ and a Windows executable version that can be run from the command line:
     delimiter = //STX12
     matcher = 1280001
     matcher_signifies = Thailand
-    input_filename = dx-xf-ff - Sat 08-13-2022 22-06-02.34.txt
+    input_filename = DX-XF-FF.txt
     output_directory = .
     file_ext = .080
