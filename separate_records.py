@@ -20,7 +20,6 @@ config = ConfigParser()
 config.read("separate_records.ini") 
 if config and config.has_section("SETTINGS"):
     settings = config['SETTINGS']
-
     delimiter = settings['delimiter'] if settings['delimiter'] else delimiter
     matcher = settings['matcher'] if settings['matcher'] else matcher
     matcher_signifies = settings['matcher_signifies'] if settings['matcher_signifies'] else matcher_signifies
@@ -37,7 +36,6 @@ parser.add_argument('-d', '--delimiter', type=str, default=delimiter, help=f"tok
 parser.add_argument('-m',  '--matcher', type=str, default=matcher, help=f"token to seek a match in records, default: {matcher}")
 args = parser.parse_args()
 
-
 # set parameters from command line options
 try: 
     input_filename = args.filename    
@@ -46,7 +44,6 @@ try:
     matcher = args.matcher
 except ImportError:
     print("using default options")
-
 
 # main function for processing input and writing output 
 def separate_records(input_filename=input_filename, delimiter=delimiter, matcher=matcher, matcher_signifies=matcher_signifies, output_directory=output_directory):
@@ -134,7 +131,6 @@ def split_content_into_sections(content, delimiter):
         sections.append(section)
     
     return sections
-
 
 # this can be run standalong or imported with `from separate_records import separate_records`
 if __name__ == "__main__":
