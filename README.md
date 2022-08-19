@@ -29,7 +29,7 @@ and a Windows executable version that can be run from the command line:
 
     separate_records.exe -f c:\input_directory\DX-XF-FF.txt -o c:\output_directory -d //STX12 -m 1280001
 
-### You can also change the default values in separate_records.ini
+### set default values in separate_records.ini
 
     [SETTINGS]
     delimiter = //STX12
