@@ -7,7 +7,7 @@ import re
 
 # set default parameters
 delimiter = "//STX12"
-matcher = "1280001"
+matcher = "02ST9211280001"
 matcher_signifies = "Thailand"
 input_filename = "DX-XF-FF.txt"
 output_directory = "."
